@@ -10,7 +10,7 @@ English | [简体中文](/README_zh.md)
 
 # Running Brickbuilder XR (Hand demo)
 
-![](video/Brickbuilder XR HD.mov)
+[![Brickbuilder XR](image/Video0.png)](https://raw.githubusercontent.com/tempstudio/mmpose-contest-brickbuilder-xr/main/video/Brickbuilder%20XR%20HD.mp4) 
 
 ## Install MMCV and MMDetection
 
