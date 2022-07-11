@@ -1,23 +1,18 @@
-# mmpose-webcam-demo
+# Brickbuilder XR & Rhythm Taichi XR: Camera based hand tracking for VR games without VR hardware using MMPOSE
+## Contest entry for "Infinity Pose" MMPose Demo Competition from Tempstudio
 
-简体中文 | [English](/README_en.md)
+English | [简体中文](/README_zh.md)  
+&nbsp;
 
-基于 MMPose Webcam API 开发应用或 demo 的项目模板
 
-<div align="center">
-    <img src="https://user-images.githubusercontent.com/15977946/171618680-49968673-6f11-4b9d-b63e-72543e8a75a0.gif">
-</div>
 
-## 配置环境
 
-### 创建虚拟环境
 
-```shell
-conda create -n mmpose-demo python=3.9 pytorch=1.10 cudatoolkit=11.3 torchvision -c pytorch -y
-conda activate mmpose-demo
-```
+# Running Brickbuilder XR (Hand demo)
 
-### 安装 MMCV 和 MMDetection
+![](video/Brickbuilder XR HD.mov)
+
+## Install MMCV and MMDetection
 
 ```shell
 pip install openmim
@@ -25,9 +20,7 @@ mim install mmcv-full
 pip install mmdet
 ```
 
-### 安装 MMPose
-
-为了能随时同步最新的 MMPose 代码，我们推荐将 MMPose 克隆到本地，并通过开发模式安装
+## Install MMPose
 
 ```shell
 cd ..
@@ -36,35 +29,143 @@ cd mmpose
 pip install -e .
 ```
 
-测试 MMPose 安装成功
+## Install Unity 
 
-```shell
-python -c "from mmpose.apis import webcam"
+https://unity3d.com/get-unity/download/archive  
+The demo uses Unity 2021.1.13f1.  
+Open the Unity project.
+
+## Configure camera and IP's
+
+2 cameras are required for the demo.  
+Use your phone as IP Camera if you don't have enough USB cameras. (Demo uses wsl - so both cameras are ip cameras.)  
+Change the camera_id fields of the below configs to match the camera configurations.  
+
+configs\examples\pose_estimation\pose_estimation.py  
+configs\examples\pose_estimation\pose_estimation_2.py
+
+```
+camera_id="http://192.168.31.129:9002/video", // <-- Replace with your camera(s)
 ```
 
-### 配置 pre-commit hook
+Configure the UDP nodes to send to the correct destination IP. (IP of host running Unity program)
 
-```shell
-# 在 mmpose-webcam-demo 目录中执行以下操作
-pip install pre-commit
-pre-commit install
+```
+        dict(type='UdpSenderNode',
+             name='udp_sender',
+             enable=True,
+             ip='192.168.31.1',       // <-- Replace with the IP of the host running Unity.
+                                      // If WSL2: it is the output of "cat /etc/resolv.conf" under linux.
+                                      // Also, turn off windows firewall.
 ```
 
-## 运行示例
+
+## Configure camera
+
+Open Unity and ensure the position, rotation and FOV of the 2 tracking cameras matches the respective paramters of the real world cameras.
+
+Ensure the real world cameras are set reasonably apart and cover the center of the play area.
+
+![Real Cameras](/image/Camera0.png)  
+![Virtual Cameras](/image/Camera1.png)
+
+## Run the Demo
 
 ```shell
-python run.py --configs configs/pose_estimation/pose_estimation.py
+python run_hand_demo.py --config configs/examples/pose_estimation/pose_estimation.py &
+python run_hand_demo.py --config configs/examples/pose_estimation/pose_estimation_2.py
 ```
 
-## 相关链接
+Click "play" in Unity.
 
-- 关于摄像头应用接口（MMPose Webcam API）
-  - [教程文档](https://mmpose.readthedocs.io/zh_CN/latest/tutorials/7_webcam_api.html)
-  - [API 查询](https://mmpose.readthedocs.io/zh_CN/latest/api.html#mmpose-apis-webcam)
-- 关于 MMPose
-  - [代码仓库](https://github.com/open-mmlab/mmpose)
-  - [使用文档](https://mmpose.readthedocs.io/zh_CN/latest/)
-  - [模型池](https://mmpose.readthedocs.io/zh_CN/latest/modelzoo.html)
-- 关于 “万物生姿” MMPose 姿态估计创意 Demo 大赛
-  - [活动主页](https://openmmlab.com/community/mmpose-demo)
-  - [作品提交](https://github.com/open-mmlab/mmpose/issues/1407)
+\
+&nbsp;
+
+# Running Rhythm Taichi XR
+
+![](video/Rhythm Taichi XR 1 HD.mp4) ![](video/Rhythm Taichi XR 2.mp4)
+
+## Install MMCV and MMDetection
+
+```shell
+pip install openmim
+mim install mmcv-full
+pip install mmdet
+```
+
+## Install MMPose
+
+```shell
+cd ..
+git clone clone https://github.com/open-mmlab/mmpose.git
+cd mmpose
+pip install -e .
+```
+
+## Install Rhythm Taichi
+
+Download the game here: https://tempstudio.itch.io/rhythm-taichi
+
+
+## Configure camera and IP's
+
+It is recommended to use a mobile phone as camera for higher performance. If using a webcam, make sure it can deliver at least constant 30 FPS.    
+(Many built-in webcams drop to 15FPS when the image changes quickly, which is not enough for this game).  
+
+The demo video uses the "IP Webcam" android application with these settings:   
+```
+Resolution 352 x 288   
+Quality 25  
+Orientation Landscape  
+Max FPS 45   
+```
+
+If your computer cannot run inference fast enough, reduce video FPS until the video no longer lags behind.   
+The demo is ran with RTX 3080 mobile with WSL2.   
+CUDA is practically required, but a reasonably modern GPU should be able to run this under linux native.   
+
+Edit configurations to send to correct IP's:  
+configs/examples/pose_estimation/rhythm_taichi.py
+
+```
+
+camera_id="http://192.168.31.129:9002/video",  // <-- Replace with your camera
+server_ip = '172.19.96.1',                     // <-- Replace with ip of host running the game
+                                               // If WSL2: it is the output of "cat /etc/resolv.conf" under linux.
+                                               // Also, turn off windows firewall.
+
+```
+
+
+## Run the Demo
+
+Start the game first (Rhythm Taichi.exe). It will stay on title screen and prompt for phone connection.
+Start the webcam app.
+
+With both of the above started, run the demo script
+
+```shell
+python run_rhythm_taichi.py --config configs/examples/pose_estimation/rhythm_taichi.py
+```
+
+The game should load into the menu. If it is the first time launching the game, it will try to install songs. Click "Skip".  
+(If you have not previously played the game, it is recommended that you play it on Android first to understand how it works.)
+Download some songs from the "Get more songs" tab.  
+
+
+Cover the camera for now and use mouse to navigate the menu.  
+Once downloaded, select the song and click "Play".
+\
+&nbsp;
+
+
+# Tech report
+
+The demo(s) work roughly as follows:
+* Use MMPOSE to collect 2D hand / body pose 
+* Send them over UDP to Unity
+* Consume the keypoint data in Unity to reconstruct hand or finger positions
+
+\
+&nbsp;
+

@@ -2,7 +2,7 @@
 executor_cfg = dict(
     # Basic configurations of the executor
     name='Pose Estimation',
-    camera_id=0,
+    camera_id="http://192.168.31.175:56000/mjpeg",
     # Define nodes.
     # The configuration of a node usually includes:
     #   1. 'type': Node class name
@@ -16,39 +16,25 @@ executor_cfg = dict(
         # 'DetectorNode':
         # This node performs object detection from the frame image using an
         # MMDetection model.
-        dict(
-            type='DetectorNode',
-            name='detector',
-            model_config='model_configs/mmdet/'
-            'ssdlite_mobilenetv2_scratch_600e_coco.py',
-            model_checkpoint='https://download.openmmlab.com'
-            '/mmdetection/v2.0/ssd/'
-            'ssdlite_mobilenetv2_scratch_600e_coco/ssdlite_mobilenetv2_'
-            'scratch_600e_coco_20210629_110627-974d9307.pth',
-            input_buffer='_input_',  # `_input_` is an executor-reserved buffer
-            output_buffer='det_result'),
-        # 'TopDownPoseEstimatorNode':
-        # This node performs keypoint detection from the frame image using an
-        # MMPose top-down model. Detection results is needed.
+          dict(
+               type='DetectorNode',
+               name='detector',
+               model_config='model_configs/mmdet/'
+               'ssdlite_mobilenetv2_scratch_600e_onehand.py',
+               model_checkpoint='https://download.openmmlab.com/mmpose/'
+               'mmdet_pretrained/'
+               'ssdlite_mobilenetv2_scratch_600e_onehand-4f9f8686_20220523.pth',
+               input_buffer='_input_',
+               output_buffer='det_result',
+               multi_input=True),
         dict(type='TopDownPoseEstimatorNode',
              name='human pose estimator',
-             model_config='model_configs/mmpose/'
-             'vipnas_mbv3_coco_wholebody_256x192_dark.py',
-             model_checkpoint='https://download.openmmlab.com/mmpose/top_down/'
-             'vipnas/vipnas_mbv3_coco_wholebody_256x192_dark'
-             '-e2158108_20211205.pth',
-             labels=['person'],
-             smooth=True,
+             model_config='model_configs/mmpose/hand/2d_kpt_sview_rgb_img/topdown_heatmap/coco_wholebody_hand/'
+             'mobilenetv2_coco_wholebody_hand_256x256.py',
+             model_checkpoint='https://download.openmmlab.com/mmpose/hand/mobilenetv2/mobilenetv2_coco_wholebody_hand_256x256-06b8c877_20210909.pth',
+             labels=['hand'],
+             smooth=False,
              input_buffer='det_result',
-             output_buffer='human_pose'),
-        dict(type='TopDownPoseEstimatorNode',
-             name='animal pose estimator',
-             model_config='model_configs/'
-             'mmpose/hrnet_w32_animalpose_256x256.py',
-             model_checkpoint='https://download.openmmlab.com/mmpose/animal/'
-             'hrnet/hrnet_w32_animalpose_256x256-1aa7f075_20210426.pth',
-             labels=['cat', 'dog', 'horse', 'sheep', 'cow'],
-             input_buffer='human_pose',
              output_buffer='animal_pose'),
         # 'ObjectAssignerNode':
         # This node binds the latest model inference result with the current
@@ -71,44 +57,15 @@ executor_cfg = dict(
              must_have_keypoint=False,
              show_keypoint=True,
              input_buffer='frame',
-             output_buffer='vis'),
-        # 'SunglassesNode':
-        # This node draw the sunglasses effect in the frame image.
-        # Pose results is needed.
-        dict(type='SunglassesEffectNode',
-             name='sunglasses',
-             enable_key='s',
-             enable=False,
-             input_buffer='vis',
-             output_buffer='vis_sunglasses'),
-        # 'BigeyeEffectNode':
-        # This node draw the big-eye effetc in the frame image.
-        # Pose results is needed.
-        dict(type='BigeyeEffectNode',
-             name='big-eye',
-             enable_key='b',
-             enable=False,
-             input_buffer='vis_sunglasses',
-             output_buffer='vis_bigeye'),
-        # 'NoticeBoardNode':
-        # This node show a notice board with given content, e.g. help
-        # information.
-        dict(
-            type='NoticeBoardNode',
-            name='instruction',
-            enable_key='h',
-            enable=True,
-            input_buffer='vis_bigeye',
-            output_buffer='vis_notice',
-            content_lines=[
-                'This is a demo for pose visualization and simple image '
-                'effects. Have fun!', '', 'Hot-keys:',
-                '"v": Pose estimation result visualization',
-                '"s": Sunglasses effect B-)', '"b": Bug-eye effect 0_0',
-                '"h": Show help information',
-                '"m": Show diagnostic information', '"q": Exit'
-            ],
-        ),
+             output_buffer='vis_notice'),
+        dict(type='UdpSenderNode',
+             name='udp_sender',
+             enable=True,
+             ip='172.19.96.1',
+             port=10001,
+             input_buffer='vis_notice',
+             output_buffer='sender',
+             camera_id = 0),
         # 'MonitorNode':
         # This node show diagnostic information in the frame image. It can
         # be used for debugging or monitoring system resource status.
@@ -116,7 +73,7 @@ executor_cfg = dict(
              name='monitor',
              enable_key='m',
              enable=False,
-             input_buffer='vis_notice',
+             input_buffer='sender',
              output_buffer='display'),
         # 'RecorderNode':
         # This node save the output video into a file.
