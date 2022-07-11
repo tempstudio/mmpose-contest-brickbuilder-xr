@@ -149,8 +149,8 @@ With both of the above started, run the demo script
 python run_rhythm_taichi.py --config configs/examples/pose_estimation/rhythm_taichi.py
 ```
 
-The game should load into the menu. If it is the first time launching the game, it will try to install songs. Click "Skip".  
-(If you have not previously played the game, it is recommended that you play it on Android first to understand how it works.)
+The game should load into the menu. If it is the first time launching the game, it will try to install songs. Click "Skip".    
+(If you have not previously played the game, it is recommended that you play it on Android first to understand how it works.)   
 Download some songs from the "Get more songs" tab.  
 
 
