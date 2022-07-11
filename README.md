@@ -8,7 +8,7 @@ English | [简体中文](/README_zh.md)
 
 
 
-# Running Brickbuilder XR (Hand demo)
+# Brickbuilder XR (Hand demo)
 
 [![Brickbuilder XR](image/Video0.png)](https://raw.githubusercontent.com/tempstudio/mmpose-contest-brickbuilder-xr/main/video/Brickbuilder%20XR%20HD.mp4) 
 
@@ -81,7 +81,7 @@ Click "play" in Unity.
 \
 &nbsp;
 
-# Running Rhythm Taichi XR
+# Rhythm Taichi XR
 
 [![Rhythm Taichi XR](image/Video1.png)](https://raw.githubusercontent.com/tempstudio/mmpose-contest-brickbuilder-xr/main/video/Rhythm%20Taichi%20XR%201%20HD.mp4) 
 [![Rhythm Taichi XR](image/Video2.png)](https://raw.githubusercontent.com/tempstudio/mmpose-contest-brickbuilder-xr/main/video/Rhythm%20Taichi%20XR%202.mp4)
@@ -110,7 +110,7 @@ Download the game here: https://tempstudio.itch.io/rhythm-taichi
 
 ## Configure camera and IP's
 
-It is recommended to use a mobile phone as camera for higher performance. If using a webcam, make sure it can deliver at least constant 30 FPS.    
+It is recommended to use a mobile phone as camera for higher performance. If using a webcam, make sure it can deliver at least constant 30 FPS.     
 (Many built-in webcams drop to 15FPS when the image changes quickly, which is not enough for this game).  
 
 The demo video uses the "IP Webcam" android application with these settings:   
