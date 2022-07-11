@@ -79,9 +79,9 @@ python run_hand_demo.py --config configs/examples/pose_estimation/pose_estimatio
 
 # 运行节奏太极XR
 
-<video src="https://raw.githubusercontent.com/tempstudio/mmpose-contest-brickbuilder-xr/main/video/Rhythm%20Taichi%20XR%202.mp4"></video>
+[![Rhythm Taichi XR](image/Video1.png)](https://raw.githubusercontent.com/tempstudio/mmpose-contest-brickbuilder-xr/main/video/Rhythm%20Taichi%20XR%201%20HD.mp4) 
+[![Rhythm Taichi XR](image/Video2.png)](https://raw.githubusercontent.com/tempstudio/mmpose-contest-brickbuilder-xr/main/video/Rhythm%20Taichi%20XR%202.mp4)
 
- ![](https://raw.githubusercontent.com/tempstudio/mmpose-contest-brickbuilder-xr/main/video/Rhythm%20Taichi%20XR%202.mp4)  
 
 ## 安装 MMCV 和 MMDetection
 
