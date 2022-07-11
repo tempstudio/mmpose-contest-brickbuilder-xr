@@ -21,7 +21,7 @@ pip install mmdet
 
 ```shell
 cd ..
-git clone clone https://github.com/open-mmlab/mmpose.git
+git clone https://github.com/open-mmlab/mmpose.git
 cd mmpose
 pip install -e .
 ```
@@ -35,7 +35,7 @@ https://unity3d.com/get-unity/download/archive
 ## 设置摄像头和IP
 
 这个项目需要2个摄像头。   
-必须的情况下，可以使用手机作为远程摄像头 (mjepg) (目前的参数使用wsl，所以2个摄像头都是远程。)   
+必须的情况下，可以使用手机作为远程摄像头 (mjpeg) (目前的参数使用wsl，所以2个摄像头都是远程。)   
 分别修改以下2个文件：
 
 configs\examples\pose_estimation\pose_estimation.py    
@@ -77,7 +77,7 @@ python run_hand_demo.py --config configs/examples/pose_estimation/pose_estimatio
 \
 &nbsp;
 
-# 运行节奏太极XR
+# 节奏太极XR
 
 [![Rhythm Taichi XR](image/Video1.png)](https://raw.githubusercontent.com/tempstudio/mmpose-contest-brickbuilder-xr/main/video/Rhythm%20Taichi%20XR%201%20HD.mp4) 
 [![Rhythm Taichi XR](image/Video2.png)](https://raw.githubusercontent.com/tempstudio/mmpose-contest-brickbuilder-xr/main/video/Rhythm%20Taichi%20XR%202.mp4)
@@ -95,7 +95,7 @@ pip install mmdet
 
 ```shell
 cd ..
-git clone clone https://github.com/open-mmlab/mmpose.git
+git clone https://github.com/open-mmlab/mmpose.git
 cd mmpose
 pip install -e .
 ```
