@@ -8,6 +8,7 @@
 # 搭砖块XR (手部姿态演示)
 
 [![Brickbuilder XR](image/Video0.png)](https://raw.githubusercontent.com/tempstudio/mmpose-contest-brickbuilder-xr/main/video/Brickbuilder%20XR%20HD.mp4) 
+注：代码只包括手势同步，不包括游戏本身。  
 
 ## 安装 MMCV 和 MMDetection
 

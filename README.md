@@ -11,7 +11,7 @@ English | [简体中文](/README_zh.md)
 # Brickbuilder XR (Hand demo)
 
 [![Brickbuilder XR](image/Video0.png)](https://raw.githubusercontent.com/tempstudio/mmpose-contest-brickbuilder-xr/main/video/Brickbuilder%20XR%20HD.mp4) 
-
+Note: This repo only includes code for hand tracking and not the game logic.
 ## Install MMCV and MMDetection
 
 ```shell
