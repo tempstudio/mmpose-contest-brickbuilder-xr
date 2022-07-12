@@ -1,4 +1,4 @@
-# 搭砖块XR / 节奏太极XR：通过MMPOSE和姿态估计无需设备体验VR游戏
+# 搭砖块XR / 节奏太极XR：通过MMPOSE和姿态估计实现体感游戏
 ## Tempstudio “万物生姿 MMPose 姿态估计创意 Demo 大赛” 参赛项目
 [English](/README.md) | 简体中文
 &nbsp;
