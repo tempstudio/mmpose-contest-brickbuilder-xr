@@ -166,3 +166,8 @@ python run_rhythm_taichi.py --config configs/examples/pose_estimation/rhythm_tai
 \
 &nbsp;
 
+# 广告
+
+在 Steam 上购买 Brickbuilder VR：https://store.steampowered.com/app/1665570/Brickbuilder_VR/   
+
+在 Google Play 上下载 Rhythm Taichi: https://play.google.com/store/apps/details?id=com.TempStudio.rhythmTaichi 

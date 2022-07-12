@@ -170,3 +170,9 @@ The demo(s) work roughly as follows:
 \
 &nbsp;
 
+
+# Shameless Plug
+
+Get Brickbuilder VR on Steam: https://store.steampowered.com/app/1665570/Brickbuilder_VR/   
+
+Get Rhythm Taichi on Google Play: https://play.google.com/store/apps/details?id=com.TempStudio.rhythmTaichi 
